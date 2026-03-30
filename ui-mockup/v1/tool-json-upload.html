@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - JSONアップロード</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .upload-zone {
+      border: 2px dashed rgba(0,0,0,0.15); border-radius: var(--radius-md); padding: 40px 16px;
+      text-align: center; cursor: pointer; transition: border-color 0.2s; margin-bottom: 16px;
+    }
+    .upload-zone:hover { border-color: var(--accent-bright); }
+    .upload-icon { font-size: 40px; margin-bottom: 8px; }
+    .upload-text { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .upload-hint { font-size: 12px; color: var(--text-secondary); }
+    .upload-result {
+      background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04); padding: 16px; margin-bottom: 16px; display: none;
+    }
+    .upload-result.show { display: block; }
+    .upload-result-title { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .upload-result-item { font-size: 13px; padding: 4px 0; color: var(--text-secondary); }
+    .upload-result-item .count { font-weight: 600; color: var(--text-primary); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">JSONアップロード</div>
+    </div>
+    <div class="settings-desc">トランザクションJSONファイルを一括で取り込みます。</div>
+    <div class="settings-section">
+      <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-icon">📤</div>
+        <div class="upload-text">ファイルを選択またはドラッグ＆ドロップ</div>
+        <div class="upload-hint">.json ファイルのみ対応</div>
+      </div>
+      <input type="file" id="fileInput" accept=".json" style="display:none" onchange="showResult()">
+
+      <div class="upload-result" id="uploadResult">
+        <div class="upload-result-title">アップロード結果</div>
+        <div class="upload-result-item">取り込み件数: <span class="count">5件</span></div>
+        <div class="upload-result-item">成功: <span class="count" style="color:var(--color-plus);">4件</span></div>
+        <div class="upload-result-item">エラー: <span class="count" style="color:var(--color-minus);">1件</span></div>
+      </div>
+
+      <button class="settings-save-btn" onclick="alert('モック: アップロード実行')">アップロード実行</button>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="tools"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    function showResult() { document.getElementById('uploadResult').classList.add('show'); }
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - テーマ設定</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .theme-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 0 16px 16px; }
+    .theme-option {
+      border: 2px solid rgba(0,0,0,0.08); border-radius: var(--radius-md); padding: 16px 8px;
+      text-align: center; cursor: pointer; transition: all 0.15s; background: var(--bg-card);
+    }
+    .theme-option.active { border-color: var(--accent-bright); }
+    .theme-preview { width: 48px; height: 48px; border-radius: var(--radius-sm); margin: 0 auto 8px; }
+    .theme-option-label { font-size: 13px; font-weight: 500; }
+    .section-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); padding: 8px 16px; }
+    .color-row { display: flex; gap: 10px; padding: 0 16px 16px; }
+    .color-swatch {
+      width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 3px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .color-swatch.active { border-color: var(--text-primary); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">テーマ設定</div>
+    </div>
+
+    <div class="section-label">外観</div>
+    <div class="theme-grid">
+      <div class="theme-option active" onclick="selectTheme(this)">
+        <div class="theme-preview" style="background:linear-gradient(180deg,#1a1a2e 50%,#f5f6fa 50%);"></div>
+        <div class="theme-option-label">ライト</div>
+      </div>
+      <div class="theme-option" onclick="selectTheme(this)">
+        <div class="theme-preview" style="background:linear-gradient(180deg,#111 50%,#1a1a2e 50%);"></div>
+        <div class="theme-option-label">ダーク</div>
+      </div>
+      <div class="theme-option" onclick="selectTheme(this)">
+        <div class="theme-preview" style="background:linear-gradient(180deg,#1a1a2e 50%,#e8e8e8 50%);"></div>
+        <div class="theme-option-label">自動</div>
+      </div>
+    </div>
+
+    <div class="section-label">アクセントカラー</div>
+    <div class="color-row">
+      <div class="color-swatch active" style="background:#4361ee;" onclick="selectColor(this)"></div>
+      <div class="color-swatch" style="background:#f72585;" onclick="selectColor(this)"></div>
+      <div class="color-swatch" style="background:#00b894;" onclick="selectColor(this)"></div>
+      <div class="color-swatch" style="background:#e17055;" onclick="selectColor(this)"></div>
+      <div class="color-swatch" style="background:#6c5ce7;" onclick="selectColor(this)"></div>
+      <div class="color-swatch" style="background:#fdcb6e;" onclick="selectColor(this)"></div>
+    </div>
+
+    <div class="settings-section">
+      <button class="settings-save-btn" onclick="alert('モック: テーマを保存')">保存する</button>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="account"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    function selectTheme(el) {
+      document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('active'));
+      el.classList.add('active');
+    }
+    function selectColor(el) {
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    }
+  </script>
+</body>
+</html>

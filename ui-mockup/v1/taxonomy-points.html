@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - もちポイント</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/taxonomy-detail.css">
+  <style>.app-container { max-width: 480px; }</style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title" data-label="home_points_label">もちポイント</div>
+    </div>
+    <div class="tax-hero">
+      <div class="tax-balance">1,200 <span class="tax-unit">pt</span></div>
+      <div class="tax-actions">
+        <a href="create-charge.html" class="tax-action-btn primary">チャージ</a>
+        <a href="create-other.html" class="tax-action-btn">使用する</a>
+      </div>
+    </div>
+    <div class="history-section">
+      <div class="history-date-group">2026年3月</div>
+      <div class="tx-list">
+        <a href="transaction-detail.html?id=tx-p001" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info"><div class="tx-label">ログインボーナス</div><div class="tx-meta">付与 — 3/28</div></div>
+          <div class="tx-amount plus">+100 pt</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-p002" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info"><div class="tx-label">ガチャ 1回</div><div class="tx-meta">使用 — 3/27</div></div>
+          <div class="tx-amount minus">-50 pt</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-p003" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info"><div class="tx-label">初回購入ボーナス</div><div class="tx-meta">付与 — 3/25</div></div>
+          <div class="tx-amount plus">+500 pt</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-p004" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info"><div class="tx-label">お手伝いボーナス</div><div class="tx-meta">付与 — 3/20</div></div>
+          <div class="tx-amount plus">+200 pt</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-p005" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info"><div class="tx-label">チャージ 500pt</div><div class="tx-meta">チャージ — 3/15</div></div>
+          <div class="tx-amount plus">+500 pt</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-p006" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info"><div class="tx-label">アイテム交換</div><div class="tx-meta">使用 — 3/10</div></div>
+          <div class="tx-amount minus">-150 pt</div>
+        </a>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active=""></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

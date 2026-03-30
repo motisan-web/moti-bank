@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - APIドキュメント</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .api-group-title { font-size: 12px; font-weight: 600; color: var(--text-secondary); padding: 12px 16px 4px; }
+    .api-item {
+      display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid rgba(0,0,0,0.05);
+      text-decoration: none; color: inherit; gap: 10px;
+    }
+    .api-item:last-child { border-bottom: none; }
+    .api-method {
+      font-size: 10px; font-weight: 700; padding: 3px 6px; border-radius: 4px; min-width: 36px;
+      text-align: center; flex-shrink: 0;
+    }
+    .api-method.get { background: rgba(0,184,148,0.15); color: #00b894; }
+    .api-method.post { background: rgba(67,97,238,0.15); color: #4361ee; }
+    .api-path { font-size: 13px; font-family: 'Courier New', monospace; flex: 1; min-width: 0; word-break: break-all; }
+    .api-desc { font-size: 11px; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">APIドキュメント</div>
+    </div>
+    <div class="settings-desc">全21エンドポイントの一覧です。</div>
+
+    <div class="api-group-title">認証 (Auth)</div>
+    <div class="settings-section"><div class="settings-card">
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/auth/login.php</div><div class="api-desc">ログイン</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/auth/logout.php</div><div class="api-desc">ログアウト</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/auth/me.php</div><div class="api-desc">現在のユーザー</div></div></div>
+    </div></div>
+
+    <div class="api-group-title">トランザクション</div>
+    <div class="settings-section"><div class="settings-card">
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/transactions/list.php</div><div class="api-desc">一覧取得</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/transactions/get.php</div><div class="api-desc">1件取得</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/transactions/create.php</div><div class="api-desc">新規作成</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/transactions/update.php</div><div class="api-desc">更新・遷移</div></div></div>
+    </div></div>
+
+    <div class="api-group-title">残高</div>
+    <div class="settings-section"><div class="settings-card">
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/balance/summary.php</div><div class="api-desc">残高サマリー</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/balance/check-limit.php</div><div class="api-desc">上限チェック</div></div></div>
+    </div></div>
+
+    <div class="api-group-title">資料データ</div>
+    <div class="settings-section"><div class="settings-card">
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/documents/list.php</div><div class="api-desc">一覧</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/documents/get.php</div><div class="api-desc">1件取得</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/documents/create.php</div><div class="api-desc">新規作成</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/documents/update.php</div><div class="api-desc">更新・遷移</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/documents/process.php</div><div class="api-desc">TX生成</div></div></div>
+    </div></div>
+
+    <div class="api-group-title">マスタデータ</div>
+    <div class="settings-section"><div class="settings-card">
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/master/categories.php</div><div class="api-desc">カテゴリ一覧</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/master/taxonomies.php</div><div class="api-desc">タクソノミー一覧</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/master/users.php</div><div class="api-desc">ユーザー一覧</div></div></div>
+      <div class="api-item"><span class="api-method get">GET</span><div><div class="api-path">/api/master/config.php</div><div class="api-desc">アプリ設定</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/master/taxonomies/create.php</div><div class="api-desc">タクソノミー作成</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/master/taxonomies/update.php</div><div class="api-desc">タクソノミー更新</div></div></div>
+      <div class="api-item"><span class="api-method post">POST</span><div><div class="api-path">/api/master/taxonomies/delete.php</div><div class="api-desc">タクソノミー削除</div></div></div>
+    </div></div>
+
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="tools"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

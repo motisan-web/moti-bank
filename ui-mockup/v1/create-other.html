@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - その他の申請</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .page-header { display: flex; align-items: center; gap: 8px; padding: 20px 16px 16px; }
+    .page-back-btn { font-size: 20px; color: var(--accent-bright); text-decoration: none; line-height: 1; }
+    .page-title { font-size: 20px; font-weight: 700; }
+    .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px; }
+    .type-card {
+      background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04); padding: 20px 16px; text-align: center;
+      text-decoration: none; color: inherit; transition: transform 0.15s, box-shadow 0.15s; cursor: pointer;
+    }
+    .type-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .type-card-icon { font-size: 28px; margin-bottom: 8px; }
+    .type-card-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .type-card-desc { font-size: 12px; color: var(--text-secondary); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">その他の申請</div>
+    </div>
+    <div class="type-grid">
+      <a href="create-grant.html" class="type-card">
+        <div class="type-card-icon">🎁</div>
+        <div class="type-card-title">付与</div>
+        <div class="type-card-desc">ポイント・コインの付与</div>
+      </a>
+      <a href="create-use.html" class="type-card">
+        <div class="type-card-icon">🛒</div>
+        <div class="type-card-title">使用</div>
+        <div class="type-card-desc">ポイント・コインの使用</div>
+      </a>
+      <a href="create-compensation.html" class="type-card">
+        <div class="type-card-icon">⚖️</div>
+        <div class="type-card-title">補填</div>
+        <div class="type-card-desc">残高の補填処理</div>
+      </a>
+      <a href="create-adjustment.html" class="type-card">
+        <div class="type-card-icon">🔧</div>
+        <div class="type-card-title">手動補正</div>
+        <div class="type-card-desc">残高の手動調整</div>
+      </a>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active=""></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

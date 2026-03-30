@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - もちコイン交換</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .coin-balance {
+      text-align: center; padding: 16px; margin: 0 16px 16px;
+      background: rgba(249,199,79,0.1); border-radius: var(--radius-md);
+    }
+    .coin-balance-label { font-size: 13px; color: var(--text-secondary); }
+    .coin-balance-value { font-size: 28px; font-weight: 700; }
+    .coin-balance-unit { font-size: 16px; font-weight: 400; color: var(--text-secondary); }
+    .exchange-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px 16px; }
+    .exchange-card {
+      background: var(--bg-card); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04); padding: 16px; text-align: center; cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .exchange-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .exchange-card-icon { font-size: 32px; margin-bottom: 8px; }
+    .exchange-card-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .exchange-card-cost { font-size: 12px; color: var(--text-secondary); }
+    .exchange-card-cost span { color: #f9c74f; font-weight: 600; }
+    .exchange-card.disabled { opacity: 0.4; pointer-events: none; }
+    .section-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); padding: 4px 16px 8px; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">もちコイン交換</div>
+    </div>
+
+    <div class="coin-balance">
+      <div class="coin-balance-label">所持コイン</div>
+      <div class="coin-balance-value">350 <span class="coin-balance-unit">枚</span></div>
+    </div>
+
+    <div class="section-label">交換可能なアイテム</div>
+    <div class="exchange-grid">
+      <div class="exchange-card" onclick="alert('モック: ガチャ1回を交換')">
+        <div class="exchange-card-icon">🎰</div>
+        <div class="exchange-card-name">ガチャ 1回</div>
+        <div class="exchange-card-cost"><span>10</span> コイン</div>
+      </div>
+      <div class="exchange-card" onclick="alert('モック: ガチャ10連を交換')">
+        <div class="exchange-card-icon">🎰</div>
+        <div class="exchange-card-name">ガチャ 10連</div>
+        <div class="exchange-card-cost"><span>90</span> コイン</div>
+      </div>
+      <div class="exchange-card" onclick="alert('モック: ポイント変換を交換')">
+        <div class="exchange-card-icon">🔄</div>
+        <div class="exchange-card-name">ポイント変換</div>
+        <div class="exchange-card-cost"><span>50</span> コイン → 100pt</div>
+      </div>
+      <div class="exchange-card" onclick="alert('モック: 特別アイテムを交換')">
+        <div class="exchange-card-icon">⭐</div>
+        <div class="exchange-card-name">特別アイテム</div>
+        <div class="exchange-card-cost"><span>200</span> コイン</div>
+      </div>
+      <div class="exchange-card disabled">
+        <div class="exchange-card-icon">👑</div>
+        <div class="exchange-card-name">レアアイテム</div>
+        <div class="exchange-card-cost"><span>500</span> コイン</div>
+      </div>
+      <div class="exchange-card disabled">
+        <div class="exchange-card-icon">💎</div>
+        <div class="exchange-card-name">超レアアイテム</div>
+        <div class="exchange-card-cost"><span>1,000</span> コイン</div>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="tools"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

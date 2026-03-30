@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - APIキー取得</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .key-display {
+      background: #1a1a2e; color: #4cc9f0; padding: 14px 16px; border-radius: var(--radius-sm);
+      font-family: 'Courier New', monospace; font-size: 13px; word-break: break-all;
+      margin-bottom: 12px; position: relative;
+    }
+    .key-copy-btn {
+      position: absolute; top: 10px; right: 10px; padding: 4px 10px; border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.2); background: none; color: #fff; font-size: 11px;
+      cursor: pointer;
+    }
+    .key-warning {
+      font-size: 12px; color: var(--color-minus); padding: 0 0 16px; line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">APIキー取得</div>
+    </div>
+    <div class="settings-desc">APIにアクセスするためのキーを発行・管理します。</div>
+    <div class="settings-section">
+      <div class="settings-group">
+        <label class="settings-group-label">現在のAPIキー</label>
+        <div class="key-display">
+          yk_live_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
+          <button class="key-copy-btn" onclick="alert('コピーしました')">コピー</button>
+        </div>
+        <div class="key-warning">⚠ このキーは他の人に共有しないでください。</div>
+      </div>
+      <button class="settings-save-btn" style="background:var(--color-minus);" onclick="alert('モック: 新しいキーを発行')">キーを再発行する</button>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="tools"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

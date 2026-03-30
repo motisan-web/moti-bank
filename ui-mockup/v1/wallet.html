@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - ウォレット</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app-container { max-width: 480px; }
+
+    /* Wallet balance area */
+    .wallet-hero {
+      background: var(--bg-hero);
+      color: var(--text-on-dark);
+      padding: 28px 20px 24px;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      text-align: center;
+    }
+    .wallet-label {
+      font-size: 13px;
+      color: var(--text-on-dark-muted);
+      margin-bottom: 4px;
+    }
+    .wallet-amount {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+    .wallet-amount .currency {
+      font-size: 22px;
+      font-weight: 400;
+      margin-right: 2px;
+    }
+    .wallet-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .wallet-action-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 24px;
+      border-radius: var(--radius-full);
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .wallet-action-btn:hover { opacity: 0.85; }
+    .wallet-action-btn.charge {
+      background: var(--color-plus);
+      color: #fff;
+    }
+    .wallet-action-btn.withdraw {
+      background: rgba(255,255,255,0.15);
+      color: var(--text-on-dark);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Filter tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 16px 16px 12px;
+      overflow-x: auto;
+    }
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    .filter-tab {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .filter-tab.active {
+      background: var(--accent-bright);
+      color: #fff;
+      border-color: var(--accent-bright);
+    }
+
+    /* History section */
+    .history-section {
+      padding: 0 16px;
+    }
+    .history-date-group {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: 12px 0 6px;
+    }
+
+    /* tx-item as <a> tag reset */
+    a.tx-item {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* See all button */
+    .see-all-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: none;
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      color: var(--accent-bright);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+    }
+    .see-all-btn:hover {
+      background: rgba(67, 97, 238, 0.04);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Wallet Balance -->
+    <div class="wallet-hero">
+      <div class="wallet-label" data-label="home_main_balance_label">メイン残高</div>
+      <div class="wallet-amount">
+        <span class="currency">¥</span>12,500
+      </div>
+      <div class="wallet-actions">
+        <a href="create-charge.html" class="wallet-action-btn charge">↑ チャージ</a>
+        <a href="create-withdraw.html" class="wallet-action-btn withdraw">↓ 引き出し</a>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">すべて</button>
+      <button class="filter-tab" data-filter="plus">入金</button>
+      <button class="filter-tab" data-filter="minus">出金</button>
+      <button class="filter-tab" data-filter="charge">チャージ</button>
+      <button class="filter-tab" data-filter="payment">建て替え</button>
+    </div>
+
+    <!-- History List -->
+    <div class="history-section">
+
+      <!-- 3月 -->
+      <div class="history-date-group">2026年3月</div>
+      <div class="tx-list">
+        <a href="transaction-detail.html?id=tx-000010" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">コンビニ 食料品</div>
+            <div class="tx-meta">建て替え・food — 3/28</div>
+          </div>
+          <div class="tx-amount minus">-¥1,280</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000009" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info">
+            <div class="tx-label">3月分チャージ</div>
+            <div class="tx-meta">チャージ — 3/27</div>
+          </div>
+          <div class="tx-amount plus">+¥5,000</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000008" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">文房具 オフィス用品</div>
+            <div class="tx-meta">建て替え・office — 3/26</div>
+          </div>
+          <div class="tx-amount minus">-¥640</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000007" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info">
+            <div class="tx-label">2月分チャージ</div>
+            <div class="tx-meta">チャージ — 3/25</div>
+          </div>
+          <div class="tx-amount plus">+¥5,000</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000006" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">ドラッグストア 日用品</div>
+            <div class="tx-meta">建て替え・daily — 3/24</div>
+          </div>
+          <div class="tx-amount minus">-¥890</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000005" class="tx-item">
+          <div class="tx-icon minus">⇄</div>
+          <div class="tx-info">
+            <div class="tx-label">補填 2月分</div>
+            <div class="tx-meta">補填 — 3/22</div>
+          </div>
+          <div class="tx-amount minus">-¥2,300</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000004" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info">
+            <div class="tx-label">お年玉チャージ</div>
+            <div class="tx-meta">チャージ — 3/20</div>
+          </div>
+          <div class="tx-amount plus">+¥10,000</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000003" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">スーパー 食料品</div>
+            <div class="tx-meta">建て替え・food — 3/18</div>
+          </div>
+          <div class="tx-amount minus">-¥2,150</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000002" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info">
+            <div class="tx-label">ログインボーナス付与</div>
+            <div class="tx-meta">付与 — 3/17</div>
+          </div>
+          <div class="tx-amount plus">+¥100</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000001" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">交通費 バス</div>
+            <div class="tx-meta">建て替え・transport — 3/15</div>
+          </div>
+          <div class="tx-amount minus">-¥460</div>
+        </a>
+      </div>
+
+      <!-- 2月 -->
+      <div class="history-date-group">2026年2月</div>
+      <div class="tx-list">
+        <a href="transaction-detail.html?id=tx-000000" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">Amazon ガジェット</div>
+            <div class="tx-meta">建て替え・gadget — 2/28</div>
+          </div>
+          <div class="tx-amount minus">-¥3,980</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000099" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info">
+            <div class="tx-label">1月分チャージ</div>
+            <div class="tx-meta">チャージ — 2/15</div>
+          </div>
+          <div class="tx-amount plus">+¥5,000</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000098" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">100均 日用品</div>
+            <div class="tx-meta">建て替え・daily — 2/10</div>
+          </div>
+          <div class="tx-amount minus">-¥330</div>
+        </a>
+        <a href="history.html" class="see-all-btn">すべて見る</a>
+      </div>
+
+    </div>
+
+    <!-- Spacer -->
+    <div style="height:24px;"></div>
+
+  </div><!-- /app-container -->
+
+  <!-- Bottom Navigation -->
+  <div data-component="bottom-nav" data-active="wallet"></div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // Filter tab switching
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

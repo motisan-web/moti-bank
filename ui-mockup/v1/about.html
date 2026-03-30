@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - アプリについて</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .about-hero { text-align: center; padding: 32px 16px; }
+    .about-logo {
+      width: 72px; height: 72px; border-radius: 18px; background: var(--accent-gradient);
+      color: #fff; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 700; margin-bottom: 12px;
+    }
+    .about-name { font-size: 22px; font-weight: 700; }
+    .about-version { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">アプリについて</div>
+    </div>
+    <div class="about-hero">
+      <div class="about-logo">ゆ</div>
+      <div class="about-name" data-label="app_name">ゆうき銀行</div>
+      <div class="about-version">Version 1.2</div>
+    </div>
+    <div class="settings-section">
+      <div class="settings-card">
+        <div class="settings-row">
+          <span class="settings-row-label">開発環境</span>
+          <span class="settings-row-value">PHP 8.1+ / JSON</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-label">フロントエンド</span>
+          <span class="settings-row-value">HTML / CSS / JS</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-label">API</span>
+          <span class="settings-row-value">21エンドポイント</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-label">データ形式</span>
+          <span class="settings-row-value">JSONファイルベース</span>
+        </div>
+        <div class="settings-row">
+          <span class="settings-row-label">ライセンス</span>
+          <span class="settings-row-value">Private</span>
+        </div>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="account"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

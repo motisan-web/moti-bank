@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - 承認待ち一覧</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .page-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 20px 16px 16px;
+    }
+    .page-back-btn {
+      font-size: 20px;
+      color: var(--accent-bright);
+      text-decoration: none;
+      line-height: 1;
+    }
+    .page-title { font-size: 20px; font-weight: 700; }
+    .pending-count-badge {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--color-pending-bg);
+      color: #e17055;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .pending-count-badge .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #e17055;
+    }
+    .pending-section { padding: 0 16px; }
+    a.tx-item { text-decoration: none; color: inherit; }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">承認待ち</div>
+      <div class="pending-count-badge"><span class="dot"></span>5件</div>
+    </div>
+
+    <div class="pending-section">
+      <div class="tx-list">
+        <a href="transaction-detail.html?id=tx-000010" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">コンビニ 食料品</div>
+            <div class="tx-meta">建て替え・food — 3/28</div>
+          </div>
+          <div class="tx-amount minus">-¥1,280</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000009" class="tx-item">
+          <div class="tx-icon plus">↑</div>
+          <div class="tx-info">
+            <div class="tx-label">3月分チャージ</div>
+            <div class="tx-meta">チャージ — 3/27</div>
+          </div>
+          <div class="tx-amount plus">+¥5,000</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000008" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">文房具 オフィス用品</div>
+            <div class="tx-meta">建て替え・office — 3/26</div>
+          </div>
+          <div class="tx-amount minus">-¥640</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000011" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">カフェ ランチ</div>
+            <div class="tx-meta">建て替え・food — 3/25</div>
+          </div>
+          <div class="tx-amount minus">-¥980</div>
+        </a>
+        <a href="transaction-detail.html?id=tx-000012" class="tx-item">
+          <div class="tx-icon minus">↓</div>
+          <div class="tx-info">
+            <div class="tx-label">電車 交通費</div>
+            <div class="tx-meta">建て替え・transport — 3/24</div>
+          </div>
+          <div class="tx-amount minus">-¥320</div>
+        </a>
+      </div>
+    </div>
+
+    <div style="height:24px;"></div>
+  </div>
+
+  <div data-component="bottom-nav" data-active=""></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

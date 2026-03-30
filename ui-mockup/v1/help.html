@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - ヘルプ</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/settings.css">
+  <style>
+    .app-container { max-width: 480px; }
+    .faq-item { border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 16px; cursor: pointer; font-size: 14px; font-weight: 500;
+    }
+    .faq-q .arrow { color: var(--text-secondary); transition: transform 0.2s; }
+    .faq-item.open .faq-q .arrow { transform: rotate(90deg); }
+    .faq-a { padding: 0 16px 14px; font-size: 13px; color: var(--text-secondary); line-height: 1.7; display: none; }
+    .faq-item.open .faq-a { display: block; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">ヘルプ</div>
+    </div>
+    <div class="settings-desc">よくある質問をまとめています。</div>
+    <div class="settings-section">
+      <div class="settings-card">
+        <div class="faq-item open">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            チャージとは何ですか？ <span class="arrow">›</span>
+          </div>
+          <div class="faq-a">メイン残高やポイントに金額を追加する操作です。申請後、管理ユーザーの承認を経て残高に反映されます。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            建て替えはどう使いますか？ <span class="arrow">›</span>
+          </div>
+          <div class="faq-a">もちさんが立て替えてくれた費用を記録する際に使います。食料品・ガジェット・日用品などのカテゴリから選択して申請してください。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            承認待ちの取引はいつ反映されますか？ <span class="arrow">›</span>
+          </div>
+          <div class="faq-a">管理ユーザー（もちさん）が承認すると、即座に残高に反映されます。差し戻された場合は修正して再申請できます。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            もちポイントとガチャコインの違いは？ <span class="arrow">›</span>
+          </div>
+          <div class="faq-a">もちポイントはお手伝いやログインボーナスで貯まるポイントです。ガチャコインはガチャ専用のコインで、購入またはボーナスで入手できます。</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+            データは安全ですか？ <span class="arrow">›</span>
+          </div>
+          <div class="faq-a">データはサーバー上のJSONファイルで管理されています。パスワードはbcryptでハッシュ化されています。定期的なバックアップを推奨します。</div>
+        </div>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+  <div data-component="bottom-nav" data-active="account"></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

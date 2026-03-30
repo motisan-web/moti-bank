@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - 取引詳細</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app-container { max-width: 480px; }
+
+    .page-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 16px 16px 8px;
+      font-size: 14px;
+      color: var(--accent-bright);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .detail-header {
+      text-align: center;
+      padding: 8px 16px 24px;
+    }
+    .detail-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .detail-icon.plus { background: var(--color-plus-bg); color: var(--color-plus); }
+    .detail-icon.minus { background: var(--color-minus-bg); color: var(--color-minus); }
+    .detail-amount {
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .detail-amount.plus { color: var(--color-plus); }
+    .detail-amount.minus { color: var(--color-minus); }
+    .detail-label {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .detail-status {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .detail-status.approved { background: var(--color-plus-bg); color: var(--color-plus); }
+    .detail-status.pending { background: var(--color-pending-bg); color: #d68910; }
+    .detail-status.rejected { background: var(--color-minus-bg); color: var(--color-minus); }
+    .detail-status.direct { background: rgba(67,97,238,0.1); color: var(--accent-bright); }
+
+    .detail-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04);
+      margin: 0 16px 16px;
+      overflow: hidden;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 14px;
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row-label {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    .detail-row-value {
+      font-weight: 500;
+      text-align: right;
+      max-width: 60%;
+      word-break: break-all;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 10px;
+      padding: 8px 16px 16px;
+    }
+    .detail-action-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: opacity 0.15s;
+    }
+    .detail-action-btn:hover { opacity: 0.85; }
+    .detail-action-btn.approve { background: var(--color-plus); color: #fff; }
+    .detail-action-btn.reject { background: var(--color-minus-bg); color: var(--color-minus); }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <a href="javascript:history.back()" class="page-back">‹ 戻る</a>
+
+    <!-- Detail Header -->
+    <div class="detail-header">
+      <div class="detail-icon minus">↓</div>
+      <div class="detail-amount minus">-¥1,280</div>
+      <div class="detail-label">コンビニ 食料品</div>
+      <span class="detail-status pending">承認待ち</span>
+    </div>
+
+    <!-- Detail Info -->
+    <div class="detail-card">
+      <div class="detail-row">
+        <span class="detail-row-label">取引ID</span>
+        <span class="detail-row-value" id="txId">tx-000010</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-row-label">カテゴリ</span>
+        <span class="detail-row-value">建て替え</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-row-label">サブカテゴリ</span>
+        <span class="detail-row-value">food</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-row-label">方向</span>
+        <span class="detail-row-value">minus</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-row-label">申請者</span>
+        <span class="detail-row-value">ゆうき</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-row-label">申請日時</span>
+        <span class="detail-row-value">2026/03/28 14:32</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-row-label">ステータス</span>
+        <span class="detail-row-value">pending</span>
+      </div>
+    </div>
+
+    <!-- Memo -->
+    <div class="detail-card">
+      <div class="detail-row">
+        <span class="detail-row-label">メモ</span>
+        <span class="detail-row-value">夕飯の買い出し</span>
+      </div>
+    </div>
+
+    <!-- Actions (shown for pending items, admin view) -->
+    <div class="detail-actions">
+      <button class="detail-action-btn approve">承認する</button>
+      <button class="detail-action-btn reject">差し戻す</button>
+    </div>
+
+    <div style="height:24px;"></div>
+  </div>
+
+  <div data-component="bottom-nav" data-active=""></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // Read tx ID from URL params
+    const params = new URLSearchParams(location.search);
+    const txId = params.get('id');
+    if (txId) {
+      document.getElementById('txId').textContent = txId;
+      document.title = 'ゆうき銀行 - ' + txId;
+    }
+  </script>
+</body>
+</html>

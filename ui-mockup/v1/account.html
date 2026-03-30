@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - アカウント</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app-container { max-width: 480px; }
+
+    /* Profile header */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 24px 16px 20px;
+    }
+    .profile-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .profile-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .profile-name {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .profile-role {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .profile-role-badge {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(67,97,238,0.1);
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    /* Menu sections */
+    .menu-section {
+      padding: 0 16px 8px;
+    }
+    .menu-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 0;
+    }
+    .menu-list {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item:hover { background: rgba(0,0,0,0.015); }
+    .menu-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .menu-item-icon.blue { background: rgba(67,97,238,0.1); }
+    .menu-item-icon.green { background: rgba(0,184,148,0.1); }
+    .menu-item-icon.orange { background: rgba(253,203,110,0.2); }
+    .menu-item-icon.purple { background: rgba(108,92,231,0.1); }
+    .menu-item-icon.gray { background: rgba(99,110,114,0.1); }
+    .menu-item-icon.red { background: rgba(225,112,85,0.1); }
+    .menu-item-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-item-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .menu-item-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+    .menu-item-arrow {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+    .menu-item-badge {
+      background: #e17055;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+
+    /* Logout button */
+    .menu-item.logout .menu-item-title {
+      color: #e17055;
+      font-weight: 600;
+    }
+
+    /* App version */
+    .app-version {
+      text-align: center;
+      padding: 20px 0 8px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="profile-avatar">ゆ</div>
+      <div class="profile-info">
+        <div class="profile-name" data-label="user_main_name">ゆうき</div>
+        <div class="profile-role">
+          <span data-label="role_main">メインユーザー</span>
+          <span class="profile-role-badge">main</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Section -->
+    <div class="menu-section">
+      <div class="menu-section-title">アカウント</div>
+      <div class="menu-list">
+        <a href="profile-edit.html" class="menu-item">
+          <div class="menu-item-icon blue">👤</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">プロフィール編集</div>
+            <div class="menu-item-desc">表示名・アイコンの変更</div>
+          </div>
+          <span class="menu-item-arrow">›</span>
+        </a>
+        <a href="security.html" class="menu-item">
+          <div class="menu-item-icon green">🔒</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">セキュリティとプライバシー</div>
+            <div class="menu-item-desc">ログイン履歴・端末管理</div>
+          </div>
+          <span class="menu-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="menu-section">
+      <div class="menu-section-title">設定</div>
+      <div class="menu-list">
+        <a href="notifications.html" class="menu-item">
+          <div class="menu-item-icon orange">🔔</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">通知設定</div>
+            <div class="menu-item-desc">承認待ち・取引通知の管理</div>
+          </div>
+          <span class="menu-item-badge">3</span>
+          <span class="menu-item-arrow">›</span>
+        </a>
+        <a href="theme.html" class="menu-item">
+          <div class="menu-item-icon purple">🎨</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">テーマ設定</div>
+            <div class="menu-item-desc">ダーク・ライト・配色の変更</div>
+          </div>
+          <span class="menu-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="menu-section">
+      <div class="menu-section-title">情報</div>
+      <div class="menu-list">
+        <a href="terms.html" class="menu-item">
+          <div class="menu-item-icon gray">📄</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">利用規約</div>
+          </div>
+          <span class="menu-item-arrow">›</span>
+        </a>
+        <a href="help.html" class="menu-item">
+          <div class="menu-item-icon gray">❓</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">ヘルプ</div>
+            <div class="menu-item-desc">使い方・よくある質問</div>
+          </div>
+          <span class="menu-item-arrow">›</span>
+        </a>
+        <a href="about.html" class="menu-item">
+          <div class="menu-item-icon gray">ℹ️</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">アプリについて</div>
+            <div class="menu-item-desc">バージョン情報</div>
+          </div>
+          <span class="menu-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Logout -->
+    <div class="menu-section">
+      <div class="menu-list">
+        <a href="login.html" class="menu-item logout">
+          <div class="menu-item-icon red">🚪</div>
+          <div class="menu-item-content">
+            <div class="menu-item-title">ログアウト</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- App Version -->
+    <div class="app-version" data-label="app_name">ゆうき銀行</div>
+    <div class="app-version" style="padding-top:0;">v1.2</div>
+
+    <!-- Spacer -->
+    <div style="height:24px;"></div>
+
+  </div><!-- /app-container -->
+
+  <!-- Bottom Navigation -->
+  <div data-component="bottom-nav" data-active="account"></div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

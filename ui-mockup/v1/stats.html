@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - 統計</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    .app-container { max-width: 480px; }
+
+    /* Page header */
+    .page-header {
+      padding: 20px 16px 0;
+    }
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    /* Period tabs */
+    .period-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 0 16px 16px;
+      overflow-x: auto;
+    }
+    .period-tabs::-webkit-scrollbar { display: none; }
+    .period-tab {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .period-tab.active {
+      background: var(--accent-bright);
+      color: #fff;
+      border-color: var(--accent-bright);
+    }
+
+    /* Chart card */
+    .chart-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04);
+      margin: 0 16px 16px;
+      padding: 16px;
+    }
+    .chart-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .chart-card canvas {
+      width: 100% !important;
+      max-height: 220px;
+    }
+
+    /* Summary cards */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px 16px;
+    }
+    .summary-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04);
+      padding: 14px;
+    }
+    .summary-card-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .summary-card-value {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .summary-card-value.plus { color: var(--color-plus); }
+    .summary-card-value.minus { color: var(--color-minus); }
+
+    /* Category ranking */
+    .rank-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .rank-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .rank-item:last-child { margin-bottom: 0; }
+    .rank-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--bg-body);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+    .rank-bar-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+    .rank-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .rank-name { font-weight: 600; }
+    .rank-amount { color: var(--text-secondary); }
+    .rank-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--bg-body);
+      overflow: hidden;
+    }
+    .rank-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    /* Heatmap */
+    .heatmap-wrap {
+      overflow-x: auto;
+    }
+    .heatmap-wrap::-webkit-scrollbar { display: none; }
+    .heatmap {
+      display: flex;
+      gap: 3px;
+    }
+    .heatmap-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .heatmap-cell {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      background: #ebedf0;
+    }
+    .heatmap-cell.lv1 { background: #c6e48b; }
+    .heatmap-cell.lv2 { background: #7bc96f; }
+    .heatmap-cell.lv3 { background: #239a3b; }
+    .heatmap-cell.lv4 { background: #196127; }
+    .heatmap-months {
+      display: flex;
+      font-size: 10px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      padding-left: 2px;
+    }
+    .heatmap-months span {
+      flex: 1;
+    }
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 10px;
+      color: var(--text-secondary);
+      justify-content: flex-end;
+    }
+    .heatmap-legend .heatmap-cell {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Year table */
+    .year-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .year-table th {
+      text-align: left;
+      font-weight: 600;
+      padding: 8px 4px;
+      border-bottom: 2px solid rgba(0,0,0,0.08);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .year-table td {
+      padding: 10px 4px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .year-table .year-col { font-weight: 700; }
+    .year-table .text-plus { color: var(--color-plus); }
+    .year-table .text-minus { color: var(--color-minus); }
+
+    /* Section title inside padding area */
+    .section-title-pad {
+      font-size: 16px;
+      font-weight: 700;
+      padding: 4px 16px 12px;
+    }
+
+    /* Donut center text */
+    .donut-wrap {
+      position: relative;
+    }
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      text-align: center;
+      pointer-events: none;
+    }
+    .donut-center-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .donut-center-value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .donut-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 12px;
+    }
+    .donut-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .donut-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .donut-legend-value {
+      color: var(--text-secondary);
+      margin-left: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-title" data-label="nav_stats">統計</div>
+    </div>
+
+    <!-- Period Tabs -->
+    <div class="period-tabs">
+      <button class="period-tab active" data-period="1m">1ヶ月</button>
+      <button class="period-tab" data-period="3m">3ヶ月</button>
+      <button class="period-tab" data-period="6m">6ヶ月</button>
+      <button class="period-tab" data-period="1y">1年</button>
+      <button class="period-tab" data-period="all">全期間</button>
+    </div>
+
+    <!-- 2. Payment Bar Chart -->
+    <div class="chart-card">
+      <div class="chart-card-title">建て替え推移</div>
+      <canvas id="paymentChart"></canvas>
+      <div style="text-align:right; margin-top:8px; font-size:13px; color:var(--text-secondary);">
+        合計: <strong style="color:var(--text-primary);">¥12,730</strong>
+      </div>
+    </div>
+
+    <!-- 3. Balance Donut -->
+    <div class="chart-card">
+      <div class="chart-card-title">残高の内訳</div>
+      <div class="donut-wrap">
+        <canvas id="balanceDonut" style="max-height:200px;"></canvas>
+        <div class="donut-center">
+          <div class="donut-center-label">総残高</div>
+          <div class="donut-center-value">¥62,500</div>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <div class="donut-legend-item">
+          <div class="donut-legend-dot" style="background:#4361ee;"></div>
+          メイン <span class="donut-legend-value">¥12,500 (20%)</span>
+        </div>
+        <div class="donut-legend-item">
+          <div class="donut-legend-dot" style="background:#4cc9f0;"></div>
+          NISA <span class="donut-legend-value">¥50,000 (80%)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Point/Coin Trend -->
+    <div class="chart-card">
+      <div class="chart-card-title">ポイント・コイン推移</div>
+      <canvas id="pointTrendChart"></canvas>
+    </div>
+
+    <!-- 5. Summary Cards -->
+    <div class="section-title-pad">サマリー</div>
+    <div class="summary-grid">
+      <div class="summary-card">
+        <div class="summary-card-label">合計建て替え</div>
+        <div class="summary-card-value minus">¥12,730</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-label">合計チャージ</div>
+        <div class="summary-card-value plus">¥25,000</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-label">合計引き出し</div>
+        <div class="summary-card-value minus">¥0</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-card-label">純増減</div>
+        <div class="summary-card-value plus">+¥9,970</div>
+      </div>
+    </div>
+
+    <!-- 7. Category Ranking -->
+    <div class="chart-card">
+      <div class="chart-card-title">カテゴリ別支出</div>
+      <ul class="rank-list">
+        <li class="rank-item">
+          <span class="rank-num">1</span>
+          <div class="rank-bar-wrap">
+            <div class="rank-label-row">
+              <span class="rank-name">🍙 食料品 (food)</span>
+              <span class="rank-amount">¥5,580 — 44%</span>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:100%;background:#e17055;"></div></div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <span class="rank-num">2</span>
+          <div class="rank-bar-wrap">
+            <div class="rank-label-row">
+              <span class="rank-name">📱 ガジェット (gadget)</span>
+              <span class="rank-amount">¥3,980 — 31%</span>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:71%;background:#6c5ce7;"></div></div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <span class="rank-num">3</span>
+          <div class="rank-bar-wrap">
+            <div class="rank-label-row">
+              <span class="rank-name">🏠 日用品 (daily)</span>
+              <span class="rank-amount">¥1,220 — 10%</span>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:22%;background:#00b894;"></div></div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <span class="rank-num">4</span>
+          <div class="rank-bar-wrap">
+            <div class="rank-label-row">
+              <span class="rank-name">✏️ オフィス (office)</span>
+              <span class="rank-amount">¥640 — 5%</span>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:11%;background:#fdcb6e;"></div></div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <span class="rank-num">5</span>
+          <div class="rank-bar-wrap">
+            <div class="rank-label-row">
+              <span class="rank-name">🚌 交通 (transport)</span>
+              <span class="rank-amount">¥460 — 4%</span>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:8%;background:#74b9ff;"></div></div>
+          </div>
+        </li>
+        <li class="rank-item">
+          <span class="rank-num">6</span>
+          <div class="rank-bar-wrap">
+            <div class="rank-label-row">
+              <span class="rank-name">📦 その他 (other)</span>
+              <span class="rank-amount">¥0 — 0%</span>
+            </div>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:0%;background:#b2bec3;"></div></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 8. Monthly Income/Expense Trend -->
+    <div class="chart-card">
+      <div class="chart-card-title">月別収支トレンド</div>
+      <canvas id="monthlyTrendChart"></canvas>
+    </div>
+
+    <!-- 6. Year Summary Table -->
+    <div class="chart-card">
+      <div class="chart-card-title">年別サマリー</div>
+      <table class="year-table">
+        <thead>
+          <tr>
+            <th>年</th>
+            <th>チャージ</th>
+            <th>建て替え</th>
+            <th>純増減</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="year-col">2026</td>
+            <td class="text-plus">¥25,000</td>
+            <td class="text-minus">¥12,730</td>
+            <td class="text-plus">+¥9,970</td>
+          </tr>
+          <tr>
+            <td class="year-col">2025</td>
+            <td class="text-plus">¥120,000</td>
+            <td class="text-minus">¥98,400</td>
+            <td class="text-plus">+¥15,200</td>
+          </tr>
+          <tr>
+            <td class="year-col">2024</td>
+            <td class="text-plus">¥96,000</td>
+            <td class="text-minus">¥87,500</td>
+            <td class="text-plus">+¥3,100</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 9. Heatmap -->
+    <div class="chart-card">
+      <div class="chart-card-title">建て替え頻度</div>
+      <div class="heatmap-months">
+        <span>1月</span><span>2月</span><span>3月</span>
+      </div>
+      <div class="heatmap-wrap">
+        <div class="heatmap" id="heatmap"></div>
+      </div>
+      <div class="heatmap-legend">
+        少ない
+        <div class="heatmap-cell"></div>
+        <div class="heatmap-cell lv1"></div>
+        <div class="heatmap-cell lv2"></div>
+        <div class="heatmap-cell lv3"></div>
+        <div class="heatmap-cell lv4"></div>
+        多い
+      </div>
+    </div>
+
+    <!-- Spacer for bottom nav -->
+    <div style="height:24px;"></div>
+
+  </div><!-- /app-container -->
+
+  <!-- Bottom Navigation -->
+  <div data-component="bottom-nav" data-active="stats"></div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // ===== Period tab switching =====
+    document.querySelectorAll('.period-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.period-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // ===== Chart defaults =====
+    Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif";
+    Chart.defaults.font.size = 11;
+    Chart.defaults.plugins.legend.display = false;
+
+    // ===== 2. Payment Bar Chart =====
+    new Chart(document.getElementById('paymentChart'), {
+      type: 'bar',
+      data: {
+        labels: ['3/1', '3/5', '3/8', '3/10', '3/14', '3/15', '3/18', '3/24', '3/26', '3/28'],
+        datasets: [
+          { label: 'food', data: [0, 0, 0, 0, 0, 0, 2150, 0, 0, 1280], backgroundColor: '#e17055', borderRadius: 4 },
+          { label: 'gadget', data: [0, 0, 0, 0, 3980, 0, 0, 0, 0, 0], backgroundColor: '#6c5ce7', borderRadius: 4 },
+          { label: 'daily', data: [0, 0, 0, 330, 0, 0, 0, 890, 0, 0], backgroundColor: '#00b894', borderRadius: 4 },
+          { label: 'office', data: [0, 0, 0, 0, 0, 0, 0, 0, 640, 0], backgroundColor: '#fdcb6e', borderRadius: 4 },
+          { label: 'transport', data: [0, 0, 0, 0, 0, 460, 0, 0, 0, 0], backgroundColor: '#74b9ff', borderRadius: 4 },
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 10 } } }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false } },
+          y: { stacked: true, ticks: { callback: v => '¥' + v.toLocaleString() }, grid: { color: 'rgba(0,0,0,0.04)' } }
+        }
+      }
+    });
+
+    // ===== 3. Balance Donut (円建て残高のみ: メイン + NISA) =====
+    new Chart(document.getElementById('balanceDonut'), {
+      type: 'doughnut',
+      data: {
+        labels: ['メイン残高', 'NISA'],
+        datasets: [{
+          data: [12500, 50000],
+          backgroundColor: ['#4361ee', '#4cc9f0'],
+          borderWidth: 2,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '65%',
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // ===== 4. Point/Coin Trend =====
+    new Chart(document.getElementById('pointTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['1月', '2月', '3月前半', '3月後半'],
+        datasets: [
+          {
+            label: 'もちポイント',
+            data: [400, 650, 1050, 1200],
+            borderColor: '#f72585',
+            backgroundColor: 'rgba(247,37,133,0.08)',
+            fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f72585'
+          },
+          {
+            label: 'ガチャコイン',
+            data: [200, 280, 310, 350],
+            borderColor: '#f9c74f',
+            backgroundColor: 'rgba(249,199,79,0.08)',
+            fill: true, tension: 0.3, pointRadius: 4, pointBackgroundColor: '#f9c74f'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { boxWidth: 10, padding: 12, font: { size: 10 } } }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: 'rgba(0,0,0,0.04)' }, beginAtZero: true }
+        }
+      }
+    });
+
+    // ===== 8. Monthly Income/Expense Trend =====
+    new Chart(document.getElementById('monthlyTrendChart'), {
+      type: 'line',
+      data: {
+        labels: ['2025/4','5','6','7','8','9','10','11','12','2026/1','2','3'],
+        datasets: [
+          {
+            label: '入金 (plus)',
+            data: [8000, 10000, 5000, 12000, 8000, 15000, 10000, 5000, 20000, 15000, 5000, 25100],
+            borderColor: '#00b894',
+            backgroundColor: 'rgba(0,184,148,0.1)',
+            fill: true, tension: 0.35, pointRadius: 3
+          },
+          {
+            label: '出金 (minus)',
+            data: [6500, 7200, 4800, 9500, 11000, 8200, 7800, 6100, 12500, 8900, 4200, 15330],
+            borderColor: '#e17055',
+            backgroundColor: 'rgba(225,112,85,0.1)',
+            fill: true, tension: 0.35, pointRadius: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { boxWidth: 10, padding: 12, font: { size: 10 } } }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { ticks: { callback: v => '¥' + (v/1000) + 'k' }, grid: { color: 'rgba(0,0,0,0.04)' } }
+        }
+      }
+    });
+
+    // ===== 9. Heatmap (13 weeks = ~3 months) =====
+    (function() {
+      const heatmap = document.getElementById('heatmap');
+      // Simulated data: random levels for 13 weeks x 7 days
+      const pattern = [
+        [0,0,1,0,0,2,0],[0,1,0,0,1,0,0],[1,0,0,2,0,0,1],[0,0,1,0,0,0,0],
+        [0,2,0,1,0,3,0],[0,0,0,0,1,0,0],[1,0,2,0,0,1,0],[0,0,0,3,0,0,1],
+        [0,1,0,0,2,0,0],[2,0,0,1,0,4,0],[0,0,1,0,0,0,2],[0,3,0,0,1,0,0],
+        [1,0,0,2,0,1,0]
+      ];
+      pattern.forEach(week => {
+        const col = document.createElement('div');
+        col.className = 'heatmap-week';
+        week.forEach(level => {
+          const cell = document.createElement('div');
+          cell.className = 'heatmap-cell' + (level > 0 ? ' lv' + Math.min(level, 4) : '');
+          col.appendChild(cell);
+        });
+        heatmap.appendChild(col);
+      });
+    })();
+  </script>
+
+</body>
+</html>

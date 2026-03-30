@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ページが見つかりません - ゆうき銀行</title>
+  <link rel="stylesheet" href="/ui-mockup/v1/css/style.css">
+  <style>
+    .error-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .error-code {
+      font-size: 72px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .error-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .error-message {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      max-width: 320px;
+    }
+    .error-message strong {
+      color: var(--text-primary);
+    }
+    .error-home-btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--accent-bright);
+      color: #fff;
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.15s;
+    }
+    .error-home-btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="error-page">
+      <div class="error-code">404</div>
+      <div class="error-title">このページはまだありません</div>
+      <div class="error-message">
+        このページは現在開発中です。<br><br>
+        <strong>もしこのページにたどり着いた場合、直前にクリックしたボタンや要素のスクリーンショットをもちさんまで送ってください。</strong><br><br>
+        開発の優先順位の参考にさせていただきます。
+      </div>
+      <a href="/ui-mockup/v1/home.html" class="error-home-btn">ホームに戻る</a>
+    </div>
+  </div>
+</body>
+</html>

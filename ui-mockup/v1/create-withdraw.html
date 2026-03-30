@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - 引き出し申請</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">引き出し申請</div>
+    </div>
+
+    <!-- Balance display -->
+    <div class="form-balance-info">
+      <div class="form-balance-label">現在の残高</div>
+      <div class="form-balance-value">¥12,500</div>
+    </div>
+
+    <div class="form-section">
+      <!-- Amount -->
+      <div class="form-group">
+        <label class="form-label">引き出し金額</label>
+        <div class="form-amount-input">
+          <span class="form-amount-prefix">¥</span>
+          <input type="number" class="form-control form-amount" placeholder="0" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- Quick amount buttons -->
+      <div class="form-quick-amounts">
+        <button class="form-quick-btn" data-amount="1000">¥1,000</button>
+        <button class="form-quick-btn" data-amount="3000">¥3,000</button>
+        <button class="form-quick-btn" data-amount="5000">¥5,000</button>
+        <button class="form-quick-btn" data-amount="12500">全額</button>
+      </div>
+
+      <!-- Label -->
+      <div class="form-group">
+        <label class="form-label">説明</label>
+        <input type="text" class="form-control" placeholder="例: 3月分引き出し">
+      </div>
+
+      <!-- Memo -->
+      <div class="form-group">
+        <label class="form-label">メモ <span class="form-optional">任意</span></label>
+        <textarea class="form-control form-textarea" rows="3" placeholder="補足メモがあれば入力"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="form-submit-btn" onclick="alert('モック: 引き出し申請を送信')">引き出し申請を送信</button>
+      <button class="form-draft-btn" onclick="alert('モック: 下書き保存')">下書き保存</button>
+    </div>
+
+    <div style="height:24px;"></div>
+  </div>
+
+  <div data-component="bottom-nav" data-active=""></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    document.querySelectorAll('.form-quick-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.form-amount').value = btn.dataset.amount;
+      });
+    });
+  </script>
+</body>
+</html>

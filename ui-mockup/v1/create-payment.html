@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - 建て替え申請</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="page-header">
+      <a href="javascript:history.back()" class="page-back-btn">‹</a>
+      <div class="page-title">建て替え申請</div>
+    </div>
+
+    <div class="form-section">
+      <!-- Amount -->
+      <div class="form-group">
+        <label class="form-label">金額</label>
+        <div class="form-amount-input">
+          <span class="form-amount-prefix">¥</span>
+          <input type="number" class="form-control form-amount" placeholder="0" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- Sub Category -->
+      <div class="form-group">
+        <label class="form-label">カテゴリ</label>
+        <div class="form-chip-group">
+          <button class="form-chip active" data-value="food">🍙 食料品</button>
+          <button class="form-chip" data-value="gadget">📱 ガジェット</button>
+          <button class="form-chip" data-value="office">✏️ オフィス</button>
+          <button class="form-chip" data-value="daily">🏠 日用品</button>
+          <button class="form-chip" data-value="transport">🚌 交通</button>
+          <button class="form-chip" data-value="other">📦 その他</button>
+        </div>
+      </div>
+
+      <!-- Label -->
+      <div class="form-group">
+        <label class="form-label">説明</label>
+        <input type="text" class="form-control" placeholder="例: コンビニ 食料品">
+      </div>
+
+      <!-- Location -->
+      <div class="form-group">
+        <label class="form-label">場所 <span class="form-optional">任意</span></label>
+        <input type="text" class="form-control" placeholder="例: セブンイレブン 渋谷店">
+      </div>
+
+      <!-- Memo -->
+      <div class="form-group">
+        <label class="form-label">メモ <span class="form-optional">任意</span></label>
+        <textarea class="form-control form-textarea" rows="3" placeholder="補足メモがあれば入力"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="form-submit-btn" onclick="alert('モック: 建て替え申請を送信')">建て替え申請を送信</button>
+      <button class="form-draft-btn" onclick="alert('モック: 下書き保存')">下書き保存</button>
+    </div>
+
+    <div style="height:24px;"></div>
+  </div>
+
+  <div data-component="bottom-nav" data-active=""></div>
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    document.querySelectorAll('.form-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.form-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ゆうき銀行 - ツール</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .app-container { max-width: 480px; }
+
+    /* Page header */
+    .page-header {
+      padding: 24px 16px 16px;
+    }
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    /* Tool sections */
+    .tool-section {
+      padding: 0 16px 8px;
+    }
+    .tool-section-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 0;
+    }
+    .tool-list {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .tool-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .tool-item:last-child { border-bottom: none; }
+    .tool-item:hover { background: rgba(0,0,0,0.015); }
+    .tool-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .tool-item-icon.blue { background: rgba(67,97,238,0.1); }
+    .tool-item-icon.green { background: rgba(0,184,148,0.1); }
+    .tool-item-icon.orange { background: rgba(253,203,110,0.2); }
+    .tool-item-icon.purple { background: rgba(108,92,231,0.1); }
+    .tool-item-icon.pink { background: rgba(247,37,133,0.1); }
+    .tool-item-icon.cyan { background: rgba(76,201,240,0.1); }
+    .tool-item-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .tool-item-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .tool-item-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 1px;
+    }
+    .tool-item-arrow {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-title" data-label="nav_tools">ツール</div>
+    </div>
+
+    <!-- Developer Section -->
+    <div class="tool-section">
+      <div class="tool-section-title">開発者向け</div>
+      <div class="tool-list">
+        <a href="tool-api-key.html" class="tool-item">
+          <div class="tool-item-icon blue">🔑</div>
+          <div class="tool-item-content">
+            <div class="tool-item-title">APIキー取得</div>
+            <div class="tool-item-desc">APIアクセス用キーの発行・管理</div>
+          </div>
+          <span class="tool-item-arrow">›</span>
+        </a>
+        <a href="tool-api-docs.html" class="tool-item">
+          <div class="tool-item-icon purple">📘</div>
+          <div class="tool-item-content">
+            <div class="tool-item-title">APIドキュメント</div>
+            <div class="tool-item-desc">全21エンドポイントの仕様書</div>
+          </div>
+          <span class="tool-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Data Section -->
+    <div class="tool-section">
+      <div class="tool-section-title">データ管理</div>
+      <div class="tool-list">
+        <a href="tool-json-create.html" class="tool-item">
+          <div class="tool-item-icon green">📝</div>
+          <div class="tool-item-content">
+            <div class="tool-item-title">JSON作成</div>
+            <div class="tool-item-desc">トランザクション・資料データのJSON生成</div>
+          </div>
+          <span class="tool-item-arrow">›</span>
+        </a>
+        <a href="tool-json-upload.html" class="tool-item">
+          <div class="tool-item-icon cyan">📤</div>
+          <div class="tool-item-content">
+            <div class="tool-item-title">トランザクションJSONアップロード</div>
+            <div class="tool-item-desc">JSONファイルから一括取り込み</div>
+          </div>
+          <span class="tool-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Exchange Section -->
+    <div class="tool-section">
+      <div class="tool-section-title">交換・ショップ</div>
+      <div class="tool-list">
+        <a href="tool-coin-exchange.html" class="tool-item">
+          <div class="tool-item-icon orange">🪙</div>
+          <div class="tool-item-content">
+            <div class="tool-item-title">もちコイン交換</div>
+            <div class="tool-item-desc">コインとアイテム・特典の交換</div>
+          </div>
+          <span class="tool-item-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Spacer -->
+    <div style="height:24px;"></div>
+
+  </div><!-- /app-container -->
+
+  <!-- Bottom Navigation -->
+  <div data-component="bottom-nav" data-active="tools"></div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>
